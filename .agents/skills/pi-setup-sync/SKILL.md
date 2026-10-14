@@ -12,15 +12,17 @@ The canonical repository is `$HOME/jackz/code-projects/my_pi`. The active user e
 Run:
 
 ```bash
-mkdir -p "$HOME/jackz/code-projects/my_pi/extensions"
+mkdir -p "$HOME/jackz/code-projects/my_pi/extensions" "$HOME/jackz/code-projects/my_pi/agents" "$HOME/jackz/code-projects/my_pi/prompts"
 rsync -a --delete "$HOME/.pi/agent/extensions/" "$HOME/jackz/code-projects/my_pi/extensions/"
+rsync -a --delete "$HOME/.pi/agent/agents/" "$HOME/jackz/code-projects/my_pi/agents/"
+rsync -a --delete "$HOME/.pi/agent/prompts/" "$HOME/jackz/code-projects/my_pi/prompts/"
 ```
 
 Then inspect the result:
 
 ```bash
 git -C "$HOME/jackz/code-projects/my_pi" status --short
-git -C "$HOME/jackz/code-projects/my_pi" diff -- extensions
+git -C "$HOME/jackz/code-projects/my_pi" diff -- extensions agents prompts
 ```
 
 Do not delete or overwrite unrelated repository files. The sync source is the active extensions directory, and the repository's `extensions/` directory should mirror it.
@@ -44,8 +46,10 @@ If GitHub authentication fails, stop and report the exact error. Do not put toke
 After cloning the repository, copy the tracked extensions into the active directory:
 
 ```bash
-mkdir -p "$HOME/.pi/agent/extensions"
+mkdir -p "$HOME/.pi/agent/extensions" "$HOME/.pi/agent/agents" "$HOME/.pi/agent/prompts"
 rsync -a "$HOME/jackz/code-projects/my_pi/extensions/" "$HOME/.pi/agent/extensions/"
+rsync -a "$HOME/jackz/code-projects/my_pi/agents/" "$HOME/.pi/agent/agents/"
+rsync -a "$HOME/jackz/code-projects/my_pi/prompts/" "$HOME/.pi/agent/prompts/"
 ```
 
 Restart Pi after installing or changing extensions. Existing session history is separate and is not synced by this skill.
